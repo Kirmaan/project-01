@@ -1,7 +1,16 @@
+@font-face {
+  font-family: customGame;
+  src: url(../fonts/pdark.ttf)
+}
+@font-face {
+  font-family: customGameTwo;
+  src: url(../fonts/ARCADECLASSIC.TTF)
+}
+
 #board div {
-  background-color: lightgray;
+  background-color: white;
   box-sizing: border-box;
-  border-radius: 50%;
+  border-radius: 30%;
   /* border-style: solid; */
   /* border-width: 1px; */
   /* border-color: black; */
@@ -13,6 +22,7 @@ body {
   border-style: solid;
   border-width: 5px;
   border-color: black;
+  background-image: url(../img/background.jpg);
 }
 #board {
   width: calc(26 * 24px);
@@ -20,16 +30,20 @@ body {
   border-style: solid;
   border-width: 1px;
   border-color: black;
+  display: none;
 }
 h1 {
+  font-family: 'customGame',Arial, sans-serif;
   text-align: center;
+  background-color: red;
 }
 h2 {
   text-align: center;
+  font-family: 'customGameTwo',Arial, sans-serif;;
 }
 #board .snake {
-  background-color: green;
-  /* background-image: url(../img/pianokeys.png); */
+  /* background-color: green; */
+  background-image: url(../img/pianokeys.png);
   display: flex;
   align-items: center;
 }
@@ -38,4 +52,29 @@ h2 {
   background-image: url(../img/mnote.png);
   display: flex;
   background-repeat: no-repeat;
+}
+button {
+  background: red;
+  border-radius: 50% / 10%;
+  color: #FFFFFF;
+  font-size: 2em; /* change this to change size */
+  height: 3em;
+  margin: 20px auto;
+  padding: 0;
+  position: relative;
+  text-align: center;
+  text-indent: 0.1em;
+  transition: all 150ms ease-out;
+  width: 4em;
+float: left;
+margin-top: 10%;
+margin-left: 8%;
+}
+button:hover {
+  background-color: rgba(0,0,0,0.8);
+	box-shadow: 0px 0px 10px rgba(255,255,100,1);
+	text-shadow: 0px 0px 10px rgba(255,255,100,1);
+}
+#restartGame {
+  margin-left: 70%;
 }

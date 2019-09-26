@@ -8,6 +8,10 @@ window.addEventListener('DOMContentLoaded', () => {
   let snakeLength
   let snakeDirection
 
+  const eatSound = new Audio('audio/bite.mp3')
+  const dieSound = new Audio('audio/firing.mp3')
+  const collideSound = new Audio('audio/collide.mp3')
+
   // let score = document.getElementById('score').innerHTML
   // console.log(score)
 
@@ -82,11 +86,13 @@ window.addEventListener('DOMContentLoaded', () => {
     // Check for walls, and restart if we collide with any
     if (snakeX < 0 || snakeY < 0 || snakeX >= boardWidth || snakeY >= boardHeight) {
       startGame()
+      dieSound.play()
     }
 
     // Tail collision
     if (board[snakeY][snakeX].snake > 0) {
       startGame()
+      collideSound.play()
     }
 
     // Collect apples
@@ -94,27 +100,27 @@ window.addEventListener('DOMContentLoaded', () => {
       snakeLength++
       board[snakeY][snakeX].apple = 0
       placeApple()
+      eatSound.play()
     }
 
-    let highScore = 0 
-    const currentScore = snakeLength - 5
-    console.log(currentScore)
-    if (highScore > currentScore) {
-      console.log('true')
-    }
-   
+    // let highScore = 0 
+    // const currentScore = snakeLength - 5
+    // console.log(currentScore)
+    // if (highScore > currentScore) {
+    //   console.log('true')
+    // }
+
     // console.log(snakeLength)
     // Setting The Current Score
-    document.getElementById('score').innerHTML = `Your Current Score Is ${snakeLength - 5}`
-    // Set The Highest Score (Pull From Local Storage)
-    
+    const topScore = document.getElementById('score').innerHTML = `${snakeLength - 5}`
+    const currentScore = document.getElementById('score').innerHTML = `Your Current Score Is ${snakeLength - 5}`
+    // Set The Highest Score (Push To Local Storage)
+    const highScore = 5
+    if (highScore < snakeLength) {
+      localStorage.setItem('highScore', topScore)
+    }
     // console.log(highScore)
-    // document.getElementById('highScore').innerHTML = `Your All Time High Score Is ${highScore}`
-
-    
- 
-    
-    
+    document.getElementById('highScore').innerHTML = `Your All Time High Score Is ${localStorage.getItem('highScore')}`
     // Update the board at the new snake position
     board[snakeY][snakeX].snake = snakeLength
 
@@ -137,18 +143,27 @@ window.addEventListener('DOMContentLoaded', () => {
     // This function calls itself, with a timeout of 1000 milliseconds
     setTimeout(gameLoop, 1000 / snakeLength)
   }
-  
+
   document.body.onkeydown = function enterKey(event) {
     // Update direction depending on key hit
-    switch (event.key) {
-      case 'ArrowUp': snakeDirection = 'Up'; break
-      case 'ArrowDown': snakeDirection = 'Down'; break
-      case 'ArrowLeft': snakeDirection = 'Left'; break
-      case 'ArrowRight': snakeDirection = 'Right'; break
+    switch (event.keyCode) {
+      case 38: if (snakeDirection !== 'Down') snakeDirection = 'Up'; break
+      case 40: if (snakeDirection !== 'Up') snakeDirection = 'Down'; break
+      case 37: if (snakeDirection !== 'Right') snakeDirection = 'Left'; break
+      case 39: if (snakeDirection !== 'Left') snakeDirection = 'Right'; break
     }
 
     // This prevents the arrow keys from scrolling the window
     event.preventDefault()
   }
   setupGame()
+  const startButton = document.getElementById('startGame')
+  const boardId = document.getElementById('board')
+  startButton.addEventListener('click', function () {
+    boardId.style.display = 'block'
+  })
+  const refreshButton = document.getElementById('restartGame')
+  refreshButton.addEventListener('click', function () {
+    boardId.style.display = 'none'
+  })
 }) 

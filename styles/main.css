@@ -8,7 +8,7 @@
 }
 
 #board div {
-  background-color: white;
+  background-color: lightgray;
   box-sizing: border-box;
   border-radius: 30%;
   /* border-style: solid; */
@@ -36,6 +36,7 @@ h1 {
   font-family: 'customGame',Arial, sans-serif;
   text-align: center;
   background-color: red;
+  color: white;
 }
 h2 {
   text-align: center;
@@ -57,7 +58,7 @@ button {
   background: red;
   border-radius: 50% / 10%;
   color: #FFFFFF;
-  font-size: 2em; /* change this to change size */
+  font-size: 1em; /* change this to change size */
   height: 3em;
   margin: 20px auto;
   padding: 0;
@@ -76,5 +77,5 @@ button:hover {
 	text-shadow: 0px 0px 10px rgba(255,255,100,1);
 }
 #restartGame {
-  margin-left: 70%;
+  margin-left: 75%;
 }

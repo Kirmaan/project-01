@@ -165,5 +165,8 @@ window.addEventListener('DOMContentLoaded', () => {
   const refreshButton = document.getElementById('restartGame')
   refreshButton.addEventListener('click', function () {
     boardId.style.display = 'none'
+    collideSound.pause()
+    eatSound.pause()
+    dieSound.pause()
   })
 }) 
